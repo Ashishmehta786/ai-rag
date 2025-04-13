@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Product_Design_Development.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="multi-agent-coding-system---product-design--development-document">Multi-Agent Coding System - Product Design &amp; Development Document</h1>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li><a href="#1-product-overview">Product Overview</a></li>
+<li><a href="#2-system-architecture">System Architecture</a></li>
+<li><a href="#3-technical-stack">Technical Stack</a></li>
+<li><a href="#4-agent-capabilities">Agent Capabilities</a></li>
+<li><a href="#5-tool-development">Tool Development</a></li>
+<li><a href="#6-api-design">API Design</a></li>
+<li><a href="#7-data-flow">Data Flow</a></li>
+<li><a href="#8-security--performance">Security &amp; Performance</a></li>
+<li><a href="#9-testing-strategy">Testing Strategy</a></li>
+<li><a href="#10-future-roadmap">Future Roadmap</a></li>
+</ol>
+<hr>
+<h2 id="1-product-overview">1. Product Overview</h2>
+<h3 id="11-description">1.1 Description</h3>
+<p>The Multi-Agent Coding System is an AI-powered coding assistance platform that leverages Google Gemini 1.5 Pro and LangChain to provide intelligent coding support, documentation search, and code generation capabilities.</p>
+<h3 id="12-core-features">1.2 Core Features</h3>
+<ul>
+<li>Advanced code generation</li>
+<li>API documentation search</li>
+<li>Mathematical problem solving</li>
+<li>Vector database integration</li>
+<li>Multi-agent architecture</li>
+<li>Web scraping capabilities</li>
+</ul>
+<h3 id="13-target-users">1.3 Target Users</h3>
+<ul>
+<li>Software developers</li>
+<li>Data scientists</li>
+<li>System architects</li>
+<li>Technical leads</li>
+<li>DevOps engineers</li>
+</ul>
+<hr>
+<h2 id="2-system-architecture">2. System Architecture</h2>
+<h3 id="21-high-level-architecture">2.1 High-Level Architecture</h3>
+<pre><code class="language-mermaid"><div class="mermaid">graph TD
+    A[Client] --> B[FastAPI Server]
+    B --> C[Multi-Agent System]
+    C --> D[Coding Agent]
+    C --> E[Future Agents...]
+    D --> F[Tools]
+    F --> G[Vector Store]
+    F --> H[Web Tools]
+    F --> I[Math Tools]
+</div></code></pre>
+<h3 id="22-component-breakdown">2.2 Component Breakdown</h3>
+<ol>
+<li>
+<p><strong>FastAPI Server</strong></p>
+<ul>
+<li>Entry point for all requests</li>
+<li>Request validation</li>
+<li>Response formatting</li>
+</ul>
+</li>
+<li>
+<p><strong>Multi-Agent System</strong></p>
+<ul>
+<li>Request routing</li>
+<li>Agent coordination</li>
+<li>Response aggregation</li>
+</ul>
+</li>
+<li>
+<p><strong>Coding Agent</strong></p>
+<ul>
+<li>Code generation</li>
+<li>Documentation search</li>
+<li>Mathematical computations</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="3-technical-stack">3. Technical Stack</h2>
+<h3 id="31-core-technologies">3.1 Core Technologies</h3>
+<ul>
+<li><strong>Backend Framework</strong>: FastAPI</li>
+<li><strong>AI Model</strong>: Google Gemini 1.5 Pro</li>
+<li><strong>Agent Framework</strong>: LangChain</li>
+<li><strong>Vector Store</strong>: FAISS</li>
+<li><strong>Documentation</strong>: Markdown</li>
+</ul>
+<h3 id="32-dependencies">3.2 Dependencies</h3>
+<pre class="hljs"><code><div>langchain&gt;=<span class="hljs-number">0.1</span><span class="hljs-number">.0</span>
+fastapi&gt;=<span class="hljs-number">0.100</span><span class="hljs-number">.0</span>
+google-generativeai&gt;=<span class="hljs-number">0.3</span><span class="hljs-number">.0</span>
+faiss-cpu&gt;=<span class="hljs-number">1.7</span><span class="hljs-number">.4</span>
+pydantic&gt;=<span class="hljs-number">2.0</span><span class="hljs-number">.0</span>
+</div></code></pre>
+<hr>
+<h2 id="4-agent-capabilities">4. Agent Capabilities</h2>
+<h3 id="41-current-tools-7-implemented">4.1 Current Tools (7 Implemented)</h3>
+<ol>
+<li>
+<p><strong>alegbra</strong></p>
+<pre class="hljs"><code><div><span class="hljs-meta">@tool </span>
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">alegbra</span><span class="hljs-params">(*args: str)</span> -&gt; str:</span>
+    <span class="hljs-string">"""Solve algebraic equations."""</span>
+</div></code></pre>
+</li>
+<li>
+<p><strong>solve_math_equations</strong></p>
+<pre class="hljs"><code><div><span class="hljs-meta">@tool</span>
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">solve_math_equations</span><span class="hljs-params">(equation: str)</span> -&gt; str:</span>
+    <span class="hljs-string">"""Solve math equations."""</span>
+</div></code></pre>
+</li>
+<li>
+<p><strong>search_api_docs</strong></p>
+<pre class="hljs"><code><div><span class="hljs-meta">@tool</span>
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">search_api_docs</span><span class="hljs-params">(query: str)</span> -&gt; str:</span>
+    <span class="hljs-string">"""Search through API documentation."""</span>
+</div></code></pre>
+</li>
+<li>
+<p><strong>search_web</strong></p>
+<pre class="hljs"><code><div><span class="hljs-meta">@tool</span>
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">search_web</span><span class="hljs-params">(query: str)</span> -&gt; str:</span>
+    <span class="hljs-string">"""Search the web for coding information."""</span>
+</div></code></pre>
+</li>
+<li>
+<p><strong>get_query_from_vectordatabase</strong></p>
+<pre class="hljs"><code><div><span class="hljs-meta">@tool </span>
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_query_from_vectordatabase</span><span class="hljs-params">(query: str)</span> -&gt; str:</span>
+    <span class="hljs-string">"""Vector database similarity search."""</span>
+</div></code></pre>
+</li>
+<li>
+<p><strong>generate_code</strong></p>
+<pre class="hljs"><code><div><span class="hljs-meta">@tool</span>
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">generate_code</span><span class="hljs-params">(prompt: str)</span> -&gt; str:</span>
+    <span class="hljs-string">"""Generate code based on requirements."""</span>
+</div></code></pre>
+</li>
+<li>
+<p><strong>solve_complex_maths_using_it</strong></p>
+<pre class="hljs"><code><div>Tool(
+    name=<span class="hljs-string">"solve_complex_maths_using_it"</span>,
+    func=scipy_general_solver,
+    description=<span class="hljs-string">"Solve complex mathematics"</span>
+)
+</div></code></pre>
+</li>
+</ol>
+<h3 id="42-future-tools-development">4.2 Future Tools Development</h3>
+<p>Target: 500+ specialized tools covering:</p>
+<ul>
+<li>Code optimization</li>
+<li>Security analysis</li>
+<li>Performance testing</li>
+<li>Database operations</li>
+<li>DevOps automation</li>
+<li>API integration</li>
+<li>UI/UX generation</li>
+<li>Documentation generation</li>
+</ul>
+<hr>
+<h2 id="5-tool-development">5. Tool Development</h2>
+<h3 id="51-tool-creation-template">5.1 Tool Creation Template</h3>
+<pre class="hljs"><code><div><span class="hljs-meta">@tool</span>
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">new_tool</span><span class="hljs-params">(parameters: str)</span> -&gt; str:</span>
+    <span class="hljs-string">"""Tool description."""</span>
+    <span class="hljs-keyword">try</span>:
+        response = <span class="hljs-keyword">await</span> self.llm.ainvoke([HumanMessage(content=parameters)])
+        <span class="hljs-keyword">return</span> response.content
+    <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:
+        <span class="hljs-keyword">return</span> <span class="hljs-string">f"Error: <span class="hljs-subst">{str(e)}</span>"</span>
+</div></code></pre>
+<h3 id="52-tool-integration-process">5.2 Tool Integration Process</h3>
+<ol>
+<li>Define tool function</li>
+<li>Add documentation</li>
+<li>Implement error handling</li>
+<li>Register with agent</li>
+<li>Add tests</li>
+<li>Deploy</li>
+</ol>
+<hr>
+<h2 id="6-api-design">6. API Design</h2>
+<h3 id="61-endpoints">6.1 Endpoints</h3>
+<h4 id="query-endpoint">Query Endpoint</h4>
+<pre class="hljs"><code><div><span class="hljs-meta">@app.post("/query")</span>
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">process_query</span><span class="hljs-params">(request: QueryRequest)</span>:</span>
+    <span class="hljs-string">"""
+    Process coding queries through the multi-agent system.
+    """</span>
+</div></code></pre>
+<h4 id="api-documentation-search">API Documentation Search</h4>
+<pre class="hljs"><code><div><span class="hljs-meta">@app.post("/search-api-docs")</span>
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">search_api_docs</span><span class="hljs-params">(request: ApiDocsRequest)</span>:</span>
+    <span class="hljs-string">"""
+    Search through API documentation.
+    """</span>
+</div></code></pre>
+<h4 id="code-extraction">Code Extraction</h4>
+<pre class="hljs"><code><div><span class="hljs-meta">@app.post("/extract-code")</span>
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">extract_code</span><span class="hljs-params">(request: ExtractCodeRequest)</span>:</span>
+    <span class="hljs-string">"""
+    Extract code examples from URLs.
+    """</span>
+</div></code></pre>
+<hr>
+<h2 id="7-data-flow">7. Data Flow</h2>
+<h3 id="71-request-processing">7.1 Request Processing</h3>
+<ol>
+<li>Client sends request</li>
+<li>FastAPI validates request</li>
+<li>Multi-agent system routes request</li>
+<li>Appropriate agent processes request</li>
+<li>Tools execute required operations</li>
+<li>Response returned to client</li>
+</ol>
+<h3 id="72-vector-store-integration">7.2 Vector Store Integration</h3>
+<pre class="hljs"><code><div><span class="hljs-meta">@app.on_event("startup")</span>
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">startup_event</span><span class="hljs-params">()</span>:</span>
+    docs = text_loader(<span class="hljs-string">"./uploaded_files/main.txt"</span>)
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=<span class="hljs-number">400</span>, chunk_overlap=<span class="hljs-number">80</span>)
+    all_splits = text_splitter.split_documents(docs)
+    texts = [doc.page_content <span class="hljs-keyword">for</span> doc <span class="hljs-keyword">in</span> all_splits]
+    vector_store.add_texts(texts, metadatas=[doc.metadata <span class="hljs-keyword">for</span> doc <span class="hljs-keyword">in</span> all_splits])
+</div></code></pre>
+<hr>
+<h2 id="8-security--performance">8. Security &amp; Performance</h2>
+<h3 id="81-security-measures">8.1 Security Measures</h3>
+<ul>
+<li>API key management</li>
+<li>Rate limiting</li>
+<li>Input validation</li>
+<li>Error handling</li>
+<li>Secure file uploads</li>
+</ul>
+<h3 id="82-performance-optimization">8.2 Performance Optimization</h3>
+<ul>
+<li>Async operations</li>
+<li>Caching</li>
+<li>Vector store indexing</li>
+<li>Response streaming</li>
+<li>Load balancing</li>
+</ul>
+<hr>
+<h2 id="9-testing-strategy">9. Testing Strategy</h2>
+<h3 id="91-test-types">9.1 Test Types</h3>
+<ol>
+<li>Unit Tests</li>
+<li>Integration Tests</li>
+<li>End-to-End Tests</li>
+<li>Performance Tests</li>
+</ol>
+<h3 id="92-test-implementation">9.2 Test Implementation</h3>
+<pre class="hljs"><code><div><span class="hljs-comment"># test_agent.py</span>
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_coding_agent</span><span class="hljs-params">()</span>:</span>
+    response = <span class="hljs-keyword">await</span> agent.process_request(
+        <span class="hljs-string">"Create a React hook for API calls"</span>
+    )
+    <span class="hljs-keyword">assert</span> <span class="hljs-string">"response"</span> <span class="hljs-keyword">in</span> response
+    <span class="hljs-keyword">assert</span> <span class="hljs-string">"thought_process"</span> <span class="hljs-keyword">in</span> response
+</div></code></pre>
+<hr>
+<h2 id="10-future-roadmap">10. Future Roadmap</h2>
+<h3 id="101-short-term-goals-3-months">10.1 Short-term Goals (3 months)</h3>
+<ul>
+<li>Implement 50 new tools</li>
+<li>Improve error handling</li>
+<li>Add caching layer</li>
+<li>Enhance documentation</li>
+</ul>
+<h3 id="102-medium-term-goals-6-months">10.2 Medium-term Goals (6 months)</h3>
+<ul>
+<li>Reach 200 tools</li>
+<li>Add new agent types</li>
+<li>Implement tool chaining</li>
+<li>Add performance monitoring</li>
+</ul>
+<h3 id="103-long-term-goals-12-months">10.3 Long-term Goals (12 months)</h3>
+<ul>
+<li>Achieve 500+ tools</li>
+<li>Add collaborative features</li>
+<li>Implement tool marketplace</li>
+<li>Support multiple LLM providers</li>
+</ul>
+<h3 id="104-tool-categories-to-develop">10.4 Tool Categories to Develop</h3>
+<ol>
+<li>Code Analysis Tools</li>
+<li>Performance Optimization</li>
+<li>Security Testing</li>
+<li>Database Operations</li>
+<li>Cloud Integration</li>
+<li>UI/UX Generation</li>
+<li>Documentation Tools</li>
+<li>Testing Automation</li>
+<li>DevOps Tools</li>
+<li>API Integration</li>
+</ol>
+<hr>
+<p><strong>Note</strong>: This document is a living document and will be updated as the system evolves and new features are added.</p>
+
+</body>
+</html>
